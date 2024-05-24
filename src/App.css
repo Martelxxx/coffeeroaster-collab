@@ -3,6 +3,7 @@ body {
 }
 
 .App {
+  box-sizing: border-box; /* Include padding and border in total width and height */
   display: grid;
   grid-template-areas: 
     "header header header"
