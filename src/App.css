@@ -21,8 +21,14 @@ body {
 header {
   grid-area: header;
   text-align: center;
-  align-items: flex-start;
+  align-items: start;
+  margin-top: -105px;
   
+}
+header h1 {
+  margin: 0;
+  padding: 0;
+  top: 0px
 }
 
 .left-sidebar {
@@ -75,6 +81,11 @@ ul {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+}
+.coffeeType:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
 .logo {

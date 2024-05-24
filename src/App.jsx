@@ -78,7 +78,7 @@ const handleCheckout = () => {
   return (
     <div className="App">
         <header>
-            <h1>My Coffee Shop</h1>
+        <h1><img className="logo" src="src/assets/coffelogo.png" alt="Logo" /> </h1>        
         </header>
         
         <div className="right-sidebar">
