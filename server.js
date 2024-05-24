@@ -8,8 +8,14 @@ const app = express();
 const coffeeRouter = require('./src/controllers/coffees');
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI);
-mongoose.connection.on('connected', () => {
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error.message);
+  });
+  mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!');
 });
 
