@@ -115,7 +115,8 @@ const handleCheckout = () => {
             <h2>Menu</h2>
             <div className='coffees'>
               {coffees.map((coffee, index) => {
-                const price = ((coffee.description.length + coffee.name.length) / 30).toFixed(2);
+                const rawPrice = (coffee.description.length + coffee.name.length) / 30;
+                const price = (Math.ceil(rawPrice * 20) / 20).toFixed(2);                
                 return (
                   <div className='coffeeType' key={index}>
                     <h3>{coffee.name}</h3>
@@ -148,6 +149,8 @@ const handleCheckout = () => {
                   placeholder="Coffee Description" 
                   minLength="100"
                   required 
+                  rows="10" 
+                  cols="50"
                 />
                 <button type="submit">Add Coffee</button>
             </form>

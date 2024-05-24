@@ -41,6 +41,7 @@ form {
   border: 1px solid #ccc;
   padding: 10px;
   overflow: auto;
+  padding-bottom: 50px;
 }
 
 .right-sidebar {
@@ -54,7 +55,21 @@ form {
   padding: 10px;
   margin: 10px;
 }
-
+li {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 30px; /* Add horizontal margin */
+  gap: 10px;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .coffees {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
