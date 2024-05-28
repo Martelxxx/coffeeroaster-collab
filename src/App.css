@@ -1,4 +1,8 @@
 body {
+  font-family: 'Cormorant Upright', sans-serif;
+  background-image: url("src/assets/mainbg.png");
+  background-size: cover;
+  
   overflow: hidden;
 }
 
@@ -19,6 +23,9 @@ body {
   padding: 2rem;
 }
 header {
+  border-radius: 10px;
+  background-image: url('src/assets/cafet1.png');
+  background-size: cover;
   grid-area: header;
   text-align: center;
   align-items: start;
@@ -28,16 +35,39 @@ header {
 header h1 {
   margin: 0;
   padding: 0;
-  top: 0px
-}
-
-.left-sidebar {
-  grid-area: left-sidebar;
-  border: 1px solid #ccc;
-  padding: 10px;
+  top: 0px;
   
 }
+
+h2 {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.mainBar {
+    /* background-image: url('src/assets/bar.png'); ; */
+    background-size: cover;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+
+.left-sidebar {
+  border-radius: 10px;
+  grid-area: left-sidebar;
+  border: 1px solid #ccc;
+  background: rgba(255, 228, 196, 0.15); 
+  backdrop-filter: blur(15px); 
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
 form {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -45,22 +75,33 @@ form {
 
 .main {
   grid-area: main;
-  border: 1px solid #ccc;
+  border: none;
   padding: 10px;
   overflow: auto;
   padding-bottom: 50px;
+  /* background-image: url('src/assets/mocha.png'); */
+  background-size: cover;
+  border-radius: 5px;
+  
 }
 
 .right-sidebar {
   grid-area: right-sidebar;
   border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 10px;
+  background: rgba(255, 228, 196, 0.15); 
+  backdrop-filter: blur(15px); 
 }
 
-.coffeeType {
+.itemType {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
+  background: rgba(255, 228, 196, 0.15); 
+  backdrop-filter: blur(15px); 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 }
 li {
   display: flex;
@@ -77,14 +118,18 @@ ul {
   flex-direction: column;
   gap: 10px;
 }
-.coffees {
+.items {
+  font-size: 24px;
+  
+  color: black;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
-.coffeeType:hover {
+.itemType:hover {
+  border: 1px solid rgb(218,165,32);
+  font-weight: bold;
   cursor: pointer;
-  transform: scale(1.1);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
@@ -96,11 +141,111 @@ ul {
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em rgb(160,82,45));
 }
 
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+textarea {
+  font-family: 'Cormorant Upright', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-bottom: 30px; /* Adjust to make space for the character count */
+  resize: none; /* Optional: to prevent resizing if necessary */
+}
+
+.char-count.red {
+  color: red;
+}
+
+.char-count.green {
+  color: lightgreen;
+}
+
+.mic {
+  width: 30%;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+select {
+  font-family: 'Cormorant Upright', sans-serif;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input {
+  font-family: 'Cormorant Upright', sans-serif;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.itemOption {
+  display: flex;
+  gap: 50px;
+}
+
+.itemButtons {
+  display: flex;
+  align-self: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.checkOut {
+  text-align: center;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+button {
+  font-family: 'Cormorant Upright', sans-serif;
+  background: linear-gradient(to right, #d2b48c, #f5f5dc); /* Gradient from tan to beige */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: black;
+  transition: all 0.2s ease;
+}
+
+.textarea-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.char-count {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.cart-item {
+  animation: typing 2s steps(1000, end);
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
 }
 
 @keyframes logo-spin {
@@ -110,6 +255,11 @@ ul {
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 90%; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -124,4 +274,9 @@ ul {
 
 .read-the-docs {
   color: #888;
+}
+
+@font-face {
+  font-family: 'cormorant';
+  src: url('src/assets/CormorantUpright-Regular.ttf');
 }

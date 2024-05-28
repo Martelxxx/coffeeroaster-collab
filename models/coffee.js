@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { type } = require('os');
 
 const coffeeSchema = new mongoose.Schema({
     name: {
@@ -6,6 +7,10 @@ const coffeeSchema = new mongoose.Schema({
         required: true
     },
     description: {
+        type: String,
+        required: true
+    },
+    type: {
         type: String,
         required: true
     }
