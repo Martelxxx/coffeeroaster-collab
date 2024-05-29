@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { fetchCoffees } from '/services/coffeeService';
+import { fetchImages } from '/services/imageService.js';
 import * as coffeeService from '/services/coffeeService.js';
+import * as imageService from '/services/imageService.js';
 
 
 const App = () => {
@@ -16,6 +18,8 @@ const App = () => {
   const [charCount, setCharCount] = useState(0);
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
+  const [generatedImage, setGeneratedImage] = useState(''); // State for generated image URL
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -51,6 +55,27 @@ const App = () => {
       alert('Incorrect password. Please try again.');
     }
   };
+
+  const handleGenerateImage = async (description) => {
+    try {
+      const response = await fetch('http://localhost:3005/generate-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: description }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      setGeneratedImage(data.image);
+    } catch (error) {
+      console.error('Error generating image:', error);
+    }
+  };
     
   const handleFormSubmit = async (event) => {
   if (newItem.description.length < 100) {
@@ -58,7 +83,9 @@ const App = () => {
     setErrorMessage('Description must be at least 100 characters long.');
   } else {
     setErrorMessage('');
-  
+
+  const image = await handleGenerateImage(newItem.description);
+
     fetch('http://localhost:3002/coffees', {
       method: 'POST',
       headers: {
@@ -74,6 +101,7 @@ const App = () => {
       .catch((error) => {
         console.error('Error:', error);
       });
+
   };
 };
 
@@ -98,9 +126,15 @@ const App = () => {
     // Function to fetch items data
     const fetchItemsData = async () => {
       const data = await fetchCoffees(); // Assuming this fetches both drinks and food items
-      console.log('Fetched data:', data); // Debug: Log fetched data
+      const data1 = await fetchImages(); // Fetch images
+      console.log('Fetched data', data, data1); // Debug: Log fetched data
       setItems(data);
+      setGeneratedImage(data1);
     };
+
+    // const fetchImageData = async () => {
+    //   const data1 = await fetchImages(); // Fetch images  
+    //   setGeneratedImage(data1);
 
     // Initialize the Web Speech API
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -133,6 +167,8 @@ const App = () => {
 
     // Fetch the items data
     fetchItemsData();
+  //   fetchImageData();
+  // }
   }, []);
 
   const totalPrice = Math.ceil(cart.reduce((total, item) => total + Number(item.price), 0) * 20) / 20;
@@ -291,7 +327,14 @@ const App = () => {
 
       <div className="left-sidebar">
         <h3>Add a New Item to Our Menu</h3>
-        
+        <select name="type" value={newItem.type} onChange={handleInputChange} required>
+            <option value="" disabled selected>
+              What type of item are you making?
+            </option>
+            <option value="drink">Drink</option>
+            <option value="food">Food</option>
+          </select>
+          <br></br>
         <form onSubmit={handleFormSubmit}>
           <input
             type="text"
@@ -324,19 +367,13 @@ const App = () => {
           </>
               }
           </button>
-          <select name="type" value={newItem.type} onChange={handleInputChange} required>
-            <option value="" disabled selected>
-              What type of item are you making?
-            </option>
-            <option value="drink">Drink</option>
-            <option value="food">Food</option>
-          </select>
+          
           <button type="submit">Add Item</button>
+          <h2>Image Generation</h2>
+        <p> {generatedImage.image} alt="Generated" </p>
         </form>
-        <h1>
-          <img className="logo" src="src/assets/coffelogo.png" alt="Logo" />
-        </h1>
-      </div>
+        
+        </div>
     </div>
   );
 };
